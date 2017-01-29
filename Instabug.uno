@@ -10,8 +10,10 @@ using Fuse.Controls.Native.Android;
 
 using Fuse.Platform;
 
-public class Instabug : Behavior {
-    public Instabug () {
+[Require("Cocoapods.Podfile.Target", "pod 'Instabug'")]
+[extern(ios) ForeignInclude(Language.ObjC, "Instabug/Instabug.h")]
+public class FuseInstabug : Behavior {
+    public FuseInstabug () {
         if defined(DESIGNMODE)
             return;
         if ((Fuse.Platform.Lifecycle.State == Fuse.Platform.ApplicationState.Foreground)
@@ -49,7 +51,6 @@ public class Instabug : Behavior {
             InitImpl(Token);
     }
 
-    [Require("Cocoapods.Podfile.Target", "pod 'Instabug'")]
     [Foreign(Language.ObjC)]
     extern(iOS) void InitImpl(string token) 
     @{
